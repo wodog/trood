@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const config = require('../config');
-const debug = require('debug')('demo1:models/index')
+const debug = require('debug')('trood:models/index')
 
 mongoose.connect(config.db, {server: {poolSize: 20}}, (err) => {
 	if (err) {

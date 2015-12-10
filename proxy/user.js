@@ -1,6 +1,6 @@
 'use strict'
 
-const debug = require('debug')('demo1:proxy/user');
+const debug = require('debug')('trood:proxy/user');
 const models = require('../models');
 const User = models.User;
 
@@ -24,7 +24,7 @@ exports.getUserByNames = (loginnames) => {
  */
 exports.getUserByLoginName = (loginname) => {
 	return new Promise((resolve, reject) => {
-		User.find({'loginname': loginname}, (err, data) => {
+		User.findOne({'loginname': loginname}, (err, data) => {
 			if (err) {
 				reject(err);
 			}
