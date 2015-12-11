@@ -18,8 +18,8 @@ api is around various services
 
 |name |description      |request    |response  |
 |-----|-----------------|-----------|----------|
-|add  |make query to add|add/a=1&b=2|{result:3}|
-|minus|make query to minus|minus/a=10&b=2|{result:8}|
+|add  |make query to add|add?a=1&b=2|{result:3}|
+|minus|make query to minus|minus?a=10&b=2|{result:8}|
 
 #### user
 

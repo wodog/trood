@@ -1,28 +1,31 @@
 'use strict'
 
 /**
- * Module dependencies
+ * module dependencies
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+/**
+ * define user schema
+ */
 let UserSchema = new Schema({
-	name: {type: String},
-    loginname: {type: String},
-    pass: {type: String},
-    email: {type: String},
-    profile_image_url: {type: String},
-    location: {type: String},
-    signature: {type: String},
-    profile: {type: String},
-    weibo: {type: String},
-    level: {type: String},
-    is_block: {type: Boolean, default: false},
-    active: {type: Boolean, default: false},
+	name: {type: String, required: true},
+    password: {type: String, required: true},
+    email: {type: String, required: true},
+	gender: {type: String, required: true},
+	signature: {type: String},
+	created_at: {type: Date, default: Date.now},
+	updated_at: {type: Date, default: Date.now}
 });
 
-UserSchema.index({loginname: 1}, {unique: true});
-UserSchema.index({email: 1}, {unique: true});
+/**
+ * define user index
+ */
+UserSchema.index({name: 1});
 
+/**
+ * exports
+ */
 module.exports = mongoose.model('User', UserSchema);
 

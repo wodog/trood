@@ -20,7 +20,11 @@ router.get('/math/minus', math.minus);
  * user route
  */
 router.get('/user', user.index);
-router.get('/user/loginname/:loginname', user.getUserByLoginName);
-router.get('/user/save', user.newAndSave);
+router.get('/user/id/:id', user.getUserById);
+router.get('/user/name/:name', user.getUserByName);
+router.get('/user/add', user.addUser);
 
+/**
+ * exports
+ */
 module.exports = router;

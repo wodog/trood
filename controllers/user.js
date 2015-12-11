@@ -1,24 +1,68 @@
 'use strict'
 
+/**
+ * module dependencies
+ */
 const User = require('../proxy').User;
+const result = require('../common/result')
 const debug = require('debug')('trood:controllers/user');
 
+
+
+/**
+ * index
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.index = (req, res, next) => {
 	res.send('this is user api');
 };
 
-exports.getUserByLoginName = (req, res, next) => {
-	debug(req.params);
-	User.getUserByLoginName(req.params.loginname).then((data) => {
-		debug(data);
-		res.json(data);
+/**
+ * get user by id
+ * format: GET /api/user/id/xxx
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getUserById = (req, res, next) => {
+	debug('params: ',req.params);
+	User.getUserById(req.params.id).then(data => {
+		res.json(new result(true, data));
+	}).catch(err => {
+        res.json(new result(false, err));
+    });
+};
+
+/**
+ * get user by name
+ * format: GET /api/user/name/xxx
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.getUserByName = (req, res, next) => {
+	debug('params: ',req.params);
+	User.getUserByName(req.params.name).then(data => {
+		res.json(new result(true, data));
+	}).catch(err => {
+		res.json(new result(false, err));
 	});
 };
 
-exports.newAndSave = (req, res, next) => {
-	debug(req.query);
-	User.newAndSave(req.query.name, req.query.loginname, req.query.pass, req.query.email).then(() => {
-		debug('ok');
-		res.send('save success');
+/**
+ * add user
+ * format: POST /api/user/add?name=xxx&email=xxx&password=xxx&gender=xxx
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.addUser = (req, res, next) => {
+	debug('query: ', req.query);
+	User.addUser(req.query).then((data) => {
+		res.json(new result(true, data));
+	}).catch(err => {
+		res.json(new result(false, err));
 	});
-}
+};

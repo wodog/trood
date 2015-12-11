@@ -1,64 +1,56 @@
 'use strict'
 
+/**
+ * module dependencies
+ */
 const debug = require('debug')('trood:proxy/user');
-const models = require('../models');
-const User = models.User;
+const User = require('../models').User;
 
 /**
- * get users by loginnames
+ * add user
+ * @param data
+ * @returns {data}
  */
-exports.getUserByNames = (loginnames) => {
-	return new Promise((resolve, reject) => {
-		User.find({'loginname': {$in: loginnames}}, (err, data) => {
-			if (err) {
-				reject(err);
-			}
-			debug('getUserByNames: ', data);
-			resolve(data);
-		});
-	});
-}
+exports.addUser = data => {
+    return new Promise((resolve, reject) => {
+        let user = new User(data);
+        user.save(err => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    })
+};
 
 /**
- * get user by loginname
+ * get user by id
+ * @param id
+ * @returns {Promise|Array|{index: number, input: string}}
  */
-exports.getUserByLoginName = (loginname) => {
-	return new Promise((resolve, reject) => {
-		User.findOne({'loginname': loginname}, (err, data) => {
-			if (err) {
-				reject(err);
-			}
-			debug('getUserByLoginName: ', data);
-			resolve(data);	
-		});
-	});
-}
+exports.getUserById = id => {
+    return new Promise((resolve, reject) => {
+        User.findOne({_id: id}, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data);
+        });
+    });
+};
 
-exports.getUserById = (id) => {
-	return new Promise((resolve, reject) => {
-		User.find({'_id': id}, (err, data) => {
-			if (err) {
-				reject(err);
-			}
-			debug('getUserById: ', data);
-			resolve(data);
-		});
-	});
-}
-
-exports.newAndSave = (name, loginname, pass, email) => {
-	return new Promise((resolve, reject) => {
-		var user = new User();
-		user.name = loginname;
-		user.loginname = loginname;
-		user.pass = pass;
-		user.email = email;
-		user.save((err) => {
-			if (err) {
-				reject(err);
-			}
-			debug('newAndSave: success');
-			resolve();
-		});
-	});
-}
+/**
+ * get user by name
+ * @param name
+ * @returns {Promise}
+ */
+exports.getUserByName = name => {
+    return new Promise((resolve, reject) => {
+        User.findOne({name: name}, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data);
+        });
+    });
+};
