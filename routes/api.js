@@ -8,6 +8,10 @@ const router = express.Router();
 const debug = require('debug')('trood:routes/api');
 const math = require('../controllers/math');
 const user = require('../controllers/user');
+const mapping = require('../common/mapping');
+const config = require('../config');
+
+mapping.readMapping(config.mapping);
 
 /**
  * math route

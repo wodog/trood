@@ -1,0 +1,7 @@
+/user/add || 根据参数来增加一个用户，参数为name，password，gender，email || user.addUser 
+/user/id/:id || 根据id来查找用户，参数为id || user.getUserById
+/user/name/:name || 根据name查找用户，参数为name || user.getUserByName
+
+
+/math/add || 参数相加 || math.add
+/math/minus || 参数相减 || math.minux
