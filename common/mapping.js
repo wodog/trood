@@ -19,7 +19,7 @@ exports.readMapping = m_path => {
 				let obj = {
 					name: column[0].trim(),
 			desc: column[1].trim(),
-			imp: column[2].trim()
+			impl: column[2].trim()
 				}
 				debug(obj);
 				result.push(obj);

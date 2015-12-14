@@ -6,9 +6,8 @@ const mapping = require('../common/mapping');
 const config = require('../config');
 
 router.get('/', (req, res, next) => {
-	mapping.readMapping(config.mapping).then(data => {
-		console.log(data);
-		res.render('index', {data,data});
+	mapping.readMapping(config.mapping).then(map_data => {
+		res.render('index', {data: map_data, title: 'Api View'});
 	});
 });
 

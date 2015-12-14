@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<p>Welcome to <%= title %></p>
+
+<div id="api_view">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>desc</th>
+            <th>impl</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i = 0; i < data.length; i++) { %>
+        <tr>
+            <td><%= data[i].name %></td>
+            <td><%= data[i].desc %></td>
+            <td><%= data[i].impl %></td>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
