@@ -45,19 +45,50 @@ $(function () {
     })
 
 
-    $('.api_del').on('click', function() {
+    /**
+     * delete one api
+     */
+    $('.api_del').on('click', function () {
 
         var r = confirm('您确定要删除这条api吗?');
-        if(!r){
+        if (!r) {
             return false;
         }
         var _id = $(this).attr('api_id');
         $.ajax({
             type: 'GET',
             url: '/api/delete?_id=' + _id,
-            success: function(data) {
+            success: function (data) {
                 location.reload();
             }
         })
     });
+
+    $('.api_update').on('click', function () {
+        /**
+         * get value
+         * @type {*|jQuery}
+         */
+        var name = $($(this).parent().siblings()[0]).text();
+        var type = $($(this).parent().siblings()[1]).text();
+        var desc = $($(this).parent().siblings()[2]).text();
+        var impl = $($(this).parent().siblings()[3]).text();
+
+
+        /**
+         * set value
+         */
+        $('#update_name input').val(name);
+        $('#update_type select').val(type);
+        $('#update_desc textarea').text(desc);
+        $('#update_impl input').val(impl);
+
+        console.log(name);
+        console.log(type);
+        console.log(desc);
+        console.log(impl);
+
+        $('#modal_update').modal();
+    });
+
 });

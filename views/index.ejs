@@ -3,18 +3,23 @@
 <head>
     <title><%= title %></title>
     <!--<link rel='stylesheet' href='/stylesheets/style.css'/>-->
-    <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
+    <link rel='stylesheet' href="/bootstrap/css/bootstrap.css"/>
     <script src="/javascripts/jquery-2.1.4.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
     <script src="/javascripts/main.js"></script>
 </head>
 <body>
-<div class="container" >
+<div class="container">
 
+
+    <!-- index header -->
     <div id="header">
         <h1><%= title %></h1>
+
         <p>Welcome to <%= title %></p>
     </div>
 
+    <!-- api view -->
     <div id="api_view">
         <table class="table table-striped">
             <thead>
@@ -33,7 +38,8 @@
                 <td><%= data[i].type %></td>
                 <td><%= data[i].desc %></td>
                 <td><%= data[i].impl %></td>
-                <td><button class="api_del" api_id="<%= data[i]._id %>">del</button></td>
+                <td><span class="glyphicon glyphicon-pencil api_update" api_id="<%= data[i]._id %>"></span> <span
+                            class="glyphicon glyphicon-remove api_del" api_id="<%= data[i]._id %>"></span></td>
             </tr>
             <% } %>
             </tbody>
@@ -45,6 +51,35 @@
         <button class="btn btn-default" style="display:none">Cancel</button>
     </div>
 
+    <!-- update modal -->
+    <div class="modal fade" id="modal_update">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Api Update</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="update_name" class="col-xs-4">Name: <input></div>
+                        <div id="update_type" class="col-xs-2">Type: <select>
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELTE</option>
+                            </select></div>
+                        <div id="update_impl" class="col-xs-4">Impl: <input></div>
+                        <div class="col-xs-12">
+                            <div id="update_desc">Desc: <textarea style="width:100%"></textarea></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Update</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
