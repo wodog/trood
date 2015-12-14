@@ -2,33 +2,47 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css'/>-->
     <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
+    <script src="/javascripts/jquery-2.1.4.min.js"></script>
+    <script src="/javascripts/main.js"></script>
 </head>
 <body>
-<h1><%= title %></h1>
+<div class="container" >
 
-<p>Welcome to <%= title %></p>
+    <div id="header">
+        <h1><%= title %></h1>
+        <p>Welcome to <%= title %></p>
+    </div>
 
-<div id="api_view">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>name</th>
-            <th>desc</th>
-            <th>impl</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for(var i = 0; i < data.length; i++) { %>
-        <tr>
-            <td><%= data[i].name %></td>
-            <td><%= data[i].desc %></td>
-            <td><%= data[i].impl %></td>
-        </tr>
-        <% } %>
-        </tbody>
-    </table>
+    <div id="api_view">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Desc</th>
+                <th>Impl</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].name %></td>
+                <td><%= data[i].type %></td>
+                <td><%= data[i].desc %></td>
+                <td><%= data[i].impl %></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+    <div id="add_btn">
+        <button class="btn btn-default">Add</button>
+        <button class="btn btn-default" style="display:none">Confirm</button>
+        <button class="btn btn-default" style="display:none">Cancel</button>
+    </div>
+
 </div>
 </body>
 </html>

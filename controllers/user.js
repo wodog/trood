@@ -3,7 +3,7 @@
 /**
  * module dependencies
  */
-const User = require('../proxy').User;
+const user = require('../proxy/user');
 const result = require('../common/result')
 const debug = require('debug')('trood:controllers/user');
 
@@ -28,7 +28,7 @@ exports.index = (req, res, next) => {
  */
 exports.getUserById = (req, res, next) => {
 	debug('params: ',req.params);
-	User.getUserById(req.params.id).then(data => {
+	user.getUserById(req.params.id).then(data => {
 		res.json(new result(true, data));
 	}).catch(err => {
         res.json(new result(false, err));
@@ -44,7 +44,7 @@ exports.getUserById = (req, res, next) => {
  */
 exports.getUserByName = (req, res, next) => {
 	debug('params: ',req.params);
-	User.getUserByName(req.params.name).then(data => {
+	user.getUserByName(req.params.name).then(data => {
 		res.json(new result(true, data));
 	}).catch(err => {
 		res.json(new result(false, err));
@@ -60,7 +60,7 @@ exports.getUserByName = (req, res, next) => {
  */
 exports.addUser = (req, res, next) => {
 	debug('query: ', req.query);
-	User.addUser(req.query).then((data) => {
+	user.addUser(req.query).then((data) => {
 		res.json(new result(true, data));
 	}).catch(err => {
 		res.json(new result(false, err));
