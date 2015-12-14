@@ -23,6 +23,7 @@
                 <th>Type</th>
                 <th>Desc</th>
                 <th>Impl</th>
+                <th>Tool</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                 <td><%= data[i].type %></td>
                 <td><%= data[i].desc %></td>
                 <td><%= data[i].impl %></td>
+                <td><button class="api_del" api_id="<%= data[i]._id %>">del</button></td>
             </tr>
             <% } %>
             </tbody>

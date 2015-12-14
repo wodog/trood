@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
     //	res.render('index', {data: map_data, title: 'Api View'});
     //});
     api.getApis().then(data => {
-       res.render('index', {data:data, title: 'Api View'});
+       res.render('index', {data:data, title: 'Api Control System'});
     });
 
 });
