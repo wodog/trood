@@ -2,7 +2,7 @@
 <html>
 <head>
     <title><%= title %></title>
-    <!--<link rel='stylesheet' href='/stylesheets/style.css'/>-->
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel='stylesheet' href="/bootstrap/css/bootstrap.css"/>
     <script src="/javascripts/jquery-2.1.4.min.js"></script>
     <script src="/bootstrap/js/bootstrap.js"></script>
@@ -29,7 +29,7 @@
         </div>
         <div id="api_view">
             <% for(var i = 0; i < data.length; i++) { %>
-            <div class="api_view_content" style="margin-top:50px;border:1px solid darkgray">
+            <div class="api_view_content" style="margin-bottom:30px;border:1px solid darkgray">
                 <div class="row api_view_body">
                     <div class="col-xs-2 api_view_name">
                         <%= data[i].name %>
@@ -41,6 +41,7 @@
                         <%= data[i].desc %>
                     </div>
                     <div class="col-xs-2">
+                        <span class="glyphicon glyphicon-send api_view_send" ></span>
                         <span class="glyphicon glyphicon-pencil api_update" api_id="<%= data[i]._id %>"></span> <span
                                 class="glyphicon glyphicon-remove api_del" api_id="<%= data[i]._id %>"></span>
                     </div>
@@ -48,9 +49,8 @@
                 <div class="api_view_foot">
                     <div class="api_view_request"></div>
                     <div class="api_view_response"></div>
-                    <button class="glyphicon glyphicon-plus api_view_add"></button>
-                    <button class="glyphicon glyphicon-minus api_view_minus"></button>
-                    <button class="glyphicon glyphicon-send api_view_send"></button>
+                    <!--<button class="glyphicon glyphicon-plus api_view_add"></button>-->
+                    <!--<button class="glyphicon glyphicon-minus api_view_minus"></button>-->
                 </div>
             </div>
             <% } %>
@@ -80,10 +80,14 @@
                                 <option value="PUT">PUT</option>
                                 <option value="DELETE">DELTE</option>
                             </select></div>
-                        <div id="update_impl" class="col-xs-4">Impl: <input></div>
                         <div class="col-xs-12">
                             <div id="update_desc">Desc: <textarea style="width:100%"></textarea></div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 api_view_request"></div>
+                        <div class="col-xs-1 glyphicon glyphicon-plus api_view_add"></div>
+                        <div class="col-xs-1 glyphicon glyphicon-minus api_view_minus"></div>
                     </div>
                 </div>
                 <div class="modal-footer">

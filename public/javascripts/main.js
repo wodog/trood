@@ -40,7 +40,9 @@ $(function () {
      */
     $('#add_btn button:eq(2)').on('click', function () {
         $('#add_input').remove();
-        location.reload();
+        $('#add_btn button:eq(0)').css('display', 'block');
+        $('#add_btn button:eq(1)').css('display', 'none');
+        $('#add_btn button:eq(2)').css('display', 'none');
     })
 
 
@@ -111,14 +113,14 @@ $(function () {
      */
     $('.api_view_send').on('click', function () {
         var that = this;
-        var name = $(this).parent().prev().find('.api_view_name').text().trim();
-        var type = $(this).parent().prev().find('.api_view_type').text().trim();
+        var name = $(this).parent().parent().find('.api_view_name').text().trim();
+        var type = $(this).parent().parent().find('.api_view_type').text().trim();
 
         var request = {};
         /**
          * get keys and values
          */
-        var req_line = $(this).parent().find('.api_view_request .row');
+        var req_line = $(this).parent().parent().parent().find('.api_view_request .row');
         req_line.each(function (index, item) {
             var key = $(item).find('input:first').val().trim();
             var value = $(item).find('input:last').val().trim();
@@ -136,6 +138,7 @@ $(function () {
         }
 
         console.log(name);
+        console.log(request);
 
         url = '/api' + name;
         $.ajax({
@@ -145,8 +148,8 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 var html = $('<div>' + JSON.stringify(data) + '</div>');
-                $(that).parent().find('.api_view_response').empty();
-                $(that).parent().find('.api_view_response').append(html);
+                $(that).parent().parent().parent().find('.api_view_response').empty();
+                $(that).parent().parent().parent().find('.api_view_response').append(html);
             }
         });
     });
@@ -194,5 +197,12 @@ $(function () {
     //        });
     //    });
     //})();
+
+    /**
+     * init
+     */
+    (function(){
+
+    })();
 
 });
