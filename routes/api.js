@@ -35,6 +35,7 @@ router.get('/user/add', user.addUser);
 router.get('/', api.getApis);
 router.get('/add', api.addApi);
 router.get('/delete', api.removeApi);
+router.post('/update', api.updateApi);
 
 /**
  * exports

@@ -28,11 +28,22 @@ exports.addApi = api_data => {
 
 exports.removeApi = api_data => {
     return new Promise((resolve, reject) => {
-       Api.remove(api_data, err => {
-           if (err) {
-               reject(err);
-           }
-           resolve();
-       })
+        Api.remove(api_data, err => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        })
+    });
+};
+
+exports.updateApi = (_id, api_date) => {
+    return new Promise((resolve, reject) => {
+        Api.update({_id: _id}, api_date, err => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
     });
 }

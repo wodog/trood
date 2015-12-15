@@ -25,7 +25,7 @@ exports.getApis = (req, res, next) => {
  * @param next
  */
 exports.addApi = (req, res, next) => {
-    debug('addApi/query: ', req.query);
+    debug('addApi:query: ', req.query);
     api.addApi(req.query).then(data => {
         res.json(new result(true, data));
     }).catch(err => {
@@ -40,8 +40,24 @@ exports.addApi = (req, res, next) => {
  * @param next
  */
 exports.removeApi = (req, res, next) => {
-    debug('remnoveApi/query: ', req.query);
+    debug('remnoveApi:query: ', req.query);
     api.removeApi(req.query).then(data => {
+        res.json(new result(true, data));
+    }).catch(err => {
+        res.json(new result(false, err));
+    });
+};
+
+/**
+ * update one api
+ * @param req
+ * @param res
+ * @param next
+ */
+exports.updateApi = (req, res, next) => {
+    debug('updateApi:query', req.query);
+    debug('updateApi:body', req.body);
+    apis.updateApi(req.query._id, req.body).then(data => {
         res.json(new result(true, data));
     }).catch(err => {
         res.json(new result(false, err));
