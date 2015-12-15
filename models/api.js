@@ -7,7 +7,6 @@ let ApiSchema = new Schema({
     name: {type: String, required: true},
     type: {type: String, required: true},
     desc: {type: String, required: true},
-    impl: {type: String, required: true}
 });
 
 ApiSchema.index({name: 1});

@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/', routes.webRouter);
 app.use('/api', require('./routes/api'));
 app.use('/', require('./routes/web'));
-
+console.log(require('./routes/api'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
