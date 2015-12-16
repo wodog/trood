@@ -57,7 +57,7 @@ exports.removeApi = (req, res, next) => {
 exports.updateApi = (req, res, next) => {
     debug('updateApi:query', req.query);
     debug('updateApi:body', req.body);
-    apis.updateApi(req.query._id, req.body).then(data => {
+    api.updateApi(req.query.id, req.body).then(data => {
         res.json(new result(true, data));
     }).catch(err => {
         res.json(new result(false, err));

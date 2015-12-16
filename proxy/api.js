@@ -33,13 +33,13 @@ exports.removeApi = api_data => {
                 reject(err);
             }
             resolve();
-        })
+        });
     });
 };
 
-exports.updateApi = (_id, api_date) => {
+exports.updateApi = (id, api_date) => {
     return new Promise((resolve, reject) => {
-        Api.update({_id: _id}, api_date, err => {
+        Api.update({_id: id}, api_date, err => {
             if (err) {
                 reject(err);
             }

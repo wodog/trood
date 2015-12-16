@@ -65,33 +65,6 @@ $(function () {
         })
     });
 
-    $('.api_update').on('click', function () {
-        /**
-         * get value
-         * @type {*|jQuery}
-         */
-        var name = $($(this).parent().siblings()[0]).text();
-        var type = $($(this).parent().siblings()[1]).text();
-        var desc = $($(this).parent().siblings()[2]).text();
-        var impl = $($(this).parent().siblings()[3]).text();
-
-
-        /**
-         * set value
-         */
-        $('#update_name input').val(name);
-        $('#update_type select').val(type);
-        $('#update_desc textarea').text(desc);
-        $('#update_impl input').val(impl);
-
-        console.log(name);
-        console.log(type);
-        console.log(desc);
-        console.log(impl);
-
-        $('#modal_update').modal();
-    });
-
 
     /**
      * add event
@@ -153,6 +126,78 @@ $(function () {
             }
         });
     });
+
+    /**
+     * go in update
+     */
+    $('.api_update').on('click', function () {
+        /**
+         * get value
+         * @type {*|jQuery}
+         */
+        var name = $($(this).parent().siblings()[0]).text().trim();
+        var type = $($(this).parent().siblings()[1]).text().trim();
+        var desc = $($(this).parent().siblings()[2]).text().trim();
+        var id = $(this).attr('api_id');
+
+        /**
+         * set value
+         */
+        $('#update_name input').val(name);
+        $('#update_type select').val(type);
+        $('#update_desc textarea').text(desc);
+        $('#update_id input').val(id);
+
+        $('#modal_update').modal();
+    });
+
+    /**
+     * update event
+     */
+    $('#api_update_btn').on('click', function () {
+        var data = getUpdateModalData(this);
+        console.log(data.request);
+        var id = $('#update_id input').val();
+
+        var url = '/api/update?id=' + id;
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function () {
+                location.reload();
+
+            }
+        });
+    });
+
+    function getUpdateModalData(update_btn) {
+        var name = $(update_btn).parent().parent().find('#update_name input').val();
+        var type = $(update_btn).parent().parent().find('#update_type select').val();
+        var desc = $(update_btn).parent().parent().find('#update_desc textarea').val();
+
+        /**
+         * get requests
+         */
+        var request = {};
+        var req_line = $(update_btn).parent().parent().find('.api_view_request .row');
+        req_line.each(function (index, item) {
+            var key = $(item).find('input:first').val().trim();
+            var value = $(item).find('input:last').val().trim();
+            request[key] = value;
+        });
+
+
+        var result = {
+            name: name,
+            type: type,
+            desc: desc,
+            request: JSON.stringify(request)
+        }
+
+        return result;
+    }
+
     ///**
     // * send ajax
     // */
@@ -201,7 +246,7 @@ $(function () {
     /**
      * init
      */
-    (function(){
+    (function () {
 
     })();
 
