@@ -12,7 +12,9 @@ const user = require('../proxy/user');
 const api = require('../proxy/api');
 
 
-//mapping.readMapping(config.mapping);
+router.get('/aaaaaaaa', (req, res, next)=> {
+});
+
 
 /**
  * math route

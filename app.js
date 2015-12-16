@@ -10,6 +10,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const trood = require('./index');
 
 const app = express();
 
@@ -35,6 +36,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+trood.addRouter(require('./routes/api'));
 
 // error handlers
 
