@@ -14,6 +14,17 @@ exports.getApis = () => {
     });
 };
 
+exports.getApiById = id => {
+    return new Promise((resolve, reject) => {
+        Api.findOne({_id: id}, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data);
+        })
+    });
+}
+
 exports.addApi = api_data => {
     return new Promise((resolve, reject) => {
         let api = new Api(api_data);

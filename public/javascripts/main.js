@@ -69,8 +69,14 @@ $(function () {
     /**
      * add event
      */
-    $('.api_view_add').on('click', function () {
-        var html = $('<div class="row"><div class="col-xs-6">Key: <input></div> <div class="col-xs-6"> Value: <input></div></div>')
+    $('.api_view_add').on('click', function (event, param1, param2) {
+        var html = '';
+        if (param1 && param2) {
+            html = $('<div class="row"><div class="col-xs-6">Key: <input value="' + param1 + '"></div> <div class="col-xs-6"> Value: <input value="' + param2 + '"></div></div>');
+        } else {
+
+            html = $('<div class="row"><div class="col-xs-6">Key: <input></div> <div class="col-xs-6"> Value: <input></div></div>');
+        }
         $(this).parent().find('.api_view_request').append(html);
     })
 
@@ -135,20 +141,40 @@ $(function () {
          * get value
          * @type {*|jQuery}
          */
-        var name = $($(this).parent().siblings()[0]).text().trim();
-        var type = $($(this).parent().siblings()[1]).text().trim();
-        var desc = $($(this).parent().siblings()[2]).text().trim();
+
+        $('#modal_update .api_view_request').empty();
+
         var id = $(this).attr('api_id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/api?id=' + id,
+            success: function (result) {
+                $('#update_name input').val(result.data.name);
+                $('#update_type select').val(result.data.type);
+                $('#update_desc textarea').text(result.data.desc);
+                $('#update_id input').val(result.data._id);
+                if (result.data.request) {
+                    var request = JSON.parse(result.data.request);
+                    for (var i in request) {
+                        $('.api_view_add').trigger('click', [i, request[i]]);
+                        //$('#modal_update .api_view_request .row ')
+                    }
+                }
+
+                $('#modal_update').modal();
+            }
+        })
+
+
+        //var name = $($(this).parent().siblings()[0]).text().trim();
+        //var type = $($(this).parent().siblings()[1]).text().trim();
+        //var desc = $($(this).parent().siblings()[2]).text().trim();
 
         /**
          * set value
          */
-        $('#update_name input').val(name);
-        $('#update_type select').val(type);
-        $('#update_desc textarea').text(desc);
-        $('#update_id input').val(id);
 
-        $('#modal_update').modal();
     });
 
     /**
@@ -247,7 +273,7 @@ $(function () {
      * init
      */
     (function () {
-
+        $('.api_view_send').trigger('click');
     })();
 
 });

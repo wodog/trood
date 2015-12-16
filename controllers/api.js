@@ -11,11 +11,24 @@ const debug = require('debug')('trood:controller/api');
  * @param next
  */
 exports.getApis = (req, res, next) => {
-    api.getApis().then(data => {
-        res.json(new result(true, data));
-    }).catch(err => {
-        res.json(new result(false, err));
-    })
+    //debug(req.query);
+    if (req.query.id) {
+        debug(req.query.id);
+        api.getApiById(req.query.id).then(data => {
+
+            debug(req.query);
+            res.json(new result(true, data));
+        }).catch(err => {
+            res.json(new result(false, err));
+        });
+    } else {
+        api.getApis().then(data => {
+            res.json(new result(true, data));
+        }).catch(err => {
+            res.json(new result(false, err));
+        });
+    }
+
 };
 
 /**
